@@ -6,7 +6,6 @@
     <title>Coins Studio - We Hack for Coins</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Tailwind dark mode configuration
         tailwind.config = {
             darkMode: 'media'
         }
@@ -16,7 +15,45 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        .address-container {
+            display: flex;
+            align-items: center;
+            background-color: theme('colors.gray.200');
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.75rem;
+        }
+        .address-scroll {
+            overflow-x: auto;
+            white-space: nowrap;
+            max-width: 200px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0,0,0,0.2) transparent;
+        }
+        .address-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .address-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 3px;
+        }
+        .dark .address-container {
+            background-color: theme('colors.gray.700');
+        }
     </style>
+    <script>
+        function copyToClipboard(button, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>`;
+                setTimeout(() => {
+                    button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                    </svg>`;
+                }, 1000);
+            });
+        }
+    </script>
 </head>
 <body class="bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 selection:bg-blue-500 selection:text-white">
     <div class="container mx-auto px-4 py-12 max-w-6xl">
@@ -72,35 +109,68 @@
                     <ul class="space-y-4">
                         <li class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700 dark:text-gray-200">BTC</span>
-                            <code class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-md text-sm text-gray-600 dark:text-gray-300">bc1qsvnmqwzlcar5jn55r8snhz6akqlpucjnzavh9l</code>
+                            <div class="flex items-center space-x-2">
+                                <div class="address-container">
+                                    <code class="address-scroll text-sm text-gray-600 dark:text-gray-300 pr-2">bc1qsvnmqwzlcar5jn55r8snhz6akqlpucjnzavh9l</code>
+                                </div>
+                                <button onclick="copyToClipboard(this, 'bc1qsvnmqwzlcar5jn55r8snhz6akqlpucjnzavh9l')" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                            </div>
                         </li>
                         <li class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700 dark:text-gray-200">NEAR</span>
-                            <code class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-md text-sm text-gray-600 dark:text-gray-300">coinsstudio.near</code>
+                            <div class="flex items-center space-x-2">
+                                <div class="address-container">
+                                    <code class="address-scroll text-sm text-gray-600 dark:text-gray-300 pr-2">coinsstudio.near</code>
+                                </div>
+                                <button onclick="copyToClipboard(this, 'coinsstudio.near')" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                            </div>
                         </li>
                         <li class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700 dark:text-gray-200">Monero</span>
-                            <code class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-md text-sm text-gray-600 dark:text-gray-300">49Aw4hBibCoC9QRDA42t6BYkrjZUKtLXPfTmnoyUr8T1FCQ2SiDf3Uz1tTTNmnXV37H9Gdfc9ATpMEzhVZZPmhbn98rRxtu</code>
+                            <div class="flex items-center space-x-2">
+                                <div class="address-container">
+                                    <code class="address-scroll text-sm text-gray-600 dark:text-gray-300 pr-2">49Aw4hBibCoC9QRDA42t6BYkrjZUKtLXPfTmnoyUr8T1FCQ2SiDf3Uz1tTTNmnXV37H9Gdfc9ATpMEzhVZZPmhbn98rRxtu</code>
+                                </div>
+                                <button onclick="copyToClipboard(this, '49Aw4hBibCoC9QRDA42t6BYkrjZUKtLXPfTmnoyUr8T1FCQ2SiDf3Uz1tTTNmnXV37H9Gdfc9ATpMEzhVZZPmhbn98rRxtu')" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                            </div>
                         </li>
                         <li class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700 dark:text-gray-200">Solana</span>
-                            <code class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-md text-sm text-gray-600 dark:text-gray-300">FDW11U7m6FyvfBqjXX8vUYLPj2M1bVby8x22dxgTsEHh</code>
+                            <div class="flex items-center space-x-2">
+                                <div class="address-container">
+                                    <code class="address-scroll text-sm text-gray-600 dark:text-gray-300 pr-2">FDW11U7m6FyvfBqjXX8vUYLPj2M1bVby8x22dxgTsEHh</code>
+                                </div>
+                                <button onclick="copyToClipboard(this, '49Aw4hBibCoC9QRDA42t6BYkrjZUKtLXPfTmnoyUr8T1FCQ2SiDf3Uz1tTTNmnXV37H9Gdfc9ATpMEzhVZZPmhbn98rRxtu')" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                            </div>
                         </li>
                         <li class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700 dark:text-gray-200">ETH</span>
-                            <code class="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-md text-sm text-gray-600 dark:text-gray-300">0x9Cd24B9215Bd0C73a3f3851644053Df7323831c3</code>
+                            <div class="flex items-center space-x-2">
+                                <div class="address-container">
+                                    <code class="address-scroll text-sm text-gray-600 dark:text-gray-300 pr-2">0x9Cd24B9215Bd0C73a3f3851644053Df7323831c3</code>
+                                </div>
+                                <button onclick="copyToClipboard(this, '49Aw4hBibCoC9QRDA42t6BYkrjZUKtLXPfTmnoyUr8T1FCQ2SiDf3Uz1tTTNmnXV37H9Gdfc9ATpMEzhVZZPmhbn98rRxtu')" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                                    </svg>
+                                </button>
+                            </div>
                         </li>
-                    </ul>
-                    <p class="mt-6 text-sm text-gray-500 dark:text-gray-400">
-                        Don't see your chain? <a href="mailto:hello@coins.studio?subject=Coin%20Support%20Inquiry" class="text-blue-600 dark:text-blue-400 hover:underline">Contact us</a> to discuss support for additional cryptocurrencies.
-                    </p>
-                </div>
-            </section>
-        </main>
-
-        <footer class="mt-16 text-center text-gray-500 dark:text-gray-400">
-            <p>© 2024 Coins Studio. All rights reserved.</p>
-        </footer>
-    </div>
-</body>
-</html>
+                        <li class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700 dark:text-
